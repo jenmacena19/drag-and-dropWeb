@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <link rel="stylesheet" href="/style.css">
+   
+</head>
+<body>
+    <div class="elementos-arrastaveis">
+        <div draggable="true">
+            Imprimir em Negrito
+        </div>
+    </div>
+    <div class="elementos-arrastaveis">
+        <div draggable="true">
+            Imprimir em Itálico
+        </div>
+        <div draggable="true">
+            Sublinhar texto
+        </div>
+    </div>
+    <div class="container-soltar">
+
+    </div>
+
+    <script>
+        const palavras = document.querySelectorAll("[draggable='true']");
+        const containerSoltar = document.querySelector(".container-soltar");
+
+        function comecarArrastar(){
+            console.log("comecou arrastar");
+            this.classList.add("arrastando");
+        }
+
+        function entrouSoltar(){
+            this.classList.add("hover");
+
+            //verificar qual elemento estou arrastando
+            const elementoArrastado =  document.querySelector(".arrastando");
+
+            //add o elemento no local
+            this.appendChild(elementoArrastado);
+
+        }
+
+        function saiuSoltar(){
+            this.classList.remove("hover");
+        }
+
+        palavras.forEach((palavra) =>{
+            palavra.addEventListener("dragstart", comecarArrastar);
+        })
+
+        containerSoltar.addEventListener("dragover", entrouSoltar);
+        containerSoltar.addEventListener("dragleave", saiuSoltar);
+        
+    </script>
+</body>
+</html>
